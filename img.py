@@ -1,0 +1,131 @@
+import re
+import time
+import urllib.request
+
+conditions = {
+    0: {"en_US": "tornado", "es_ES": "tornado"},
+    1: {"en_US": "tropical storm", "es_ES": "tomenta tropical"},
+    2: {"en_US": "hurricane", "es_ES": "huracán"},
+    3: {"en_US": "severe thunderstorms", "es_ES": "tormentas severas"},
+    4: {"en_US": "thunderstorms", "es_ES": "tormentas eléctricas"},
+    5: {"en_US": "mixed rain and snow", "es_ES": "lluvia y nieve mzcladas"},
+    6: {"en_US": "mixed rain and sleet",
+        "es_ES": "la lluvia y el granizo meclado"},
+    7: {"en_US": "mixed snow and sleet",
+        "es_ES": "la nieve y el granizo mezclado"},
+    8: {"en_US": "freezing drizzle", "es_ES": "congelación llovizna"},
+    9: {"en_US": "drizzle", "es_ES": "llovizna"},
+    10: {"en_US": "freezing rain", "es_ES": "lluia helada"},
+    11: {"en_US": "showers", "es_ES": "lluvia ligera"},
+    12: {"en_US": "rain", "es_ES": "lluvia"},
+    13: {"en_US": "snow flurries", "es_ES": "copos de nieve"},
+    14: {"en_US": "light snow showers", "es_ES": "nevadas ligras"},
+    15: {"en_US": "blowing snow", "es_ES": "la nieve que sopla"},
+    16: {"en_US": "snow", "es_ES": "nieve"},
+    17: {"en_US": "hail", "es_ES": "granizo"},
+    18: {"en_US": "sleet", "es_ES": "aguanieve"},
+    19: {"en_US": "dust", "es_ES": "polvo"},
+    20: {"en_US": "foggy", "es_ES": "brumos"},
+    21: {"en_US": "haze", "es_ES": "neblina"},
+    22: {"en_US": "smoky", "es_ES": "ahumado"},
+    23: {"en_US": "blustery", "es_ES": "borrasoso"},
+    24: {"en_US": "windy", "es_ES": "ventoso"},
+    25: {"en_US": "cold", "es_ES": "frío"},
+    26: {"en_US": "cloudy", "es_ES": "nubldo"},
+    27: {"en_US": "mostly cloudy", "es_ES": "Pacialmente nublado "},
+    28: {"en_US": "mostly cloudy", "es_ES": "mayormente nublado "},
+    29: {"en_US": "partly cloudy", "es_ES": "parcialmente nublado"},
+    30: {"en_US": "partly cloudy", "es_ES": "parcialmente nublado "},
+    31: {"en_US": "clear ", "es_ES": "claro "},
+    32: {"en_US": "sunny", "es_ES": "soleado"},
+    33: {"en_US": "fair ", "es_ES": "lindo y sco "},
+    34: {"en_US": "fair ", "es_ES": "lindo y seco "},
+    35: {"en_US": "mixed rain and hail",
+         "es_ES": "l lluvia y el granizo mezclado"},
+    36: {"en_US": "hot", "es_ES": "caliente"},
+    37: {"en_US": "isolated thunderstorms",
+         "e_ES": "tormentas eléctricas aisladas"},
+    38: {"en_US": "scattered thunderstorms",
+         "es_ES": "tormentas eléctricas aisladas"},
+    39: {"en_US": "scattered thunderstorms",
+         "es_ES": "tormentas eléctricas aisladas"},
+    40: {"en_US": "scattered showers", "es_ES": "lluvias aisladas"},
+    41: {"en_US": "heavy snow", "es_ES": "nevadas fuertes"},
+    42: {"en_US": "scattered snow showers",
+         "es_ES": "nevads aisladas"},
+    43: {"en_US": "heavy snow", "es_ES": "nevadas fuertes"},
+    44: {"en_US": "partly cloudy", "es_ES": "parcialmente nblado"},
+    45: {"en_US": "thundershowers", "es_ES": "tormentosos"},
+    46: {"en_US": "snow showers", "es_ES": "nevadas"},
+    47: {"en_US": "isolated thundershowers",
+         "es_ES": "tormentosos aislados"},
+    3200: {"en_US": "not available", "es_ES": "no está disponible"}
+}
+
+conditions2 = [
+   "tornado",
+  "tropical storm",
+  "hurricane",
+  "severe thunderstorms",
+  "thunderstorms",
+  "mixed rain and snow",
+  "mixed rain and sleet",
+  "mixed snow and sleet",
+  "freezing drizzle",
+  "drizzle",
+  "freezing rain",
+  "showers",
+  "showers",
+  "snow flurries",
+  "light snow showers",
+  "blowing snow",
+  "snow",
+  "hail",
+  "sleet",
+  "dust",
+  "foggy",
+  "haze",
+  "smoky",
+  "blustery",
+  "windy",
+  "cold",
+  "cloudy",
+  "mostly cloudy",
+  "mostly cloudy",
+  "partly cloudy",
+  "partly cloudy",
+  "clear",
+  "sunny",
+  "fair",
+  "fair",
+  "mixed rain and hail",
+  "hot",
+  "isolated thunderstorms",
+  "scattered thunderstorms",
+  "scattered thunderstorms",
+  "scattered showers",
+  "heavy snow",
+  "scattered snow showers",
+  "heavy snow",
+  "partly cloudy",
+  "thundershowers",
+  "snow showers",
+  "isolated thundershowers",
+  "not available",
+]
+
+for x in conditions2:
+    # name = re.sub('\s', '_', conditions[x]['en_US'].lower())
+    name = re.sub(r"\s", "_", x)
+    image_type = 'night'
+    print(name)
+    try:
+        urllib.request.urlretrieve(
+            url="https://www.yahoo.com/sy/os/weather/1.0.1/shadow_icon/60x60/{0}_{1}@2x.png".format(
+                name, image_type),
+            filename="img/{0}_{1}.png".format(name, image_type))
+        print('OK')
+    except:
+        continue
+
+    time.sleep(5)

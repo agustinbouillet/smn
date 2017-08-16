@@ -1,0 +1,8 @@
+beautifulsoup4==4.6.0
+bs4==0.0.1
+Django==1.11.2
+lxml==3.8.0
+python-slugify==1.2.4
+pytz==2017.2
+schedule==0.4.3
+Unidecode==0.4.21
