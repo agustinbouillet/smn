@@ -8,6 +8,8 @@ import re
 import time
 import urllib.request
 
+import texttable
+
 import schedule
 from bs4 import BeautifulSoup
 from django.template.defaultfilters import slugify
@@ -188,9 +190,9 @@ if __name__ == "__main__":
 
 	locaciones = [
 		{'ciudad': 'Buenos_Aires', 'provincia': 0},
-		{'ciudad': 'Aeroparque_Buenos_Aires', 'provincia': 0},
-		{'ciudad': 'Mar_del_Plata', 'provincia': 1},
-		{'ciudad': 'La_Plata', 'provincia': 1},
+		#{'ciudad': 'Aeroparque_Buenos_Aires', 'provincia': 0},
+		# {'ciudad': 'Mar_del_Plata', 'provincia': 1},
+		#{'ciudad': 'La_Plata', 'provincia': 1},
 		#{'ciudad': 'Chascomus', 'provincia':1}
 	]
 
@@ -209,6 +211,33 @@ if __name__ == "__main__":
 
 				informe.append(data)
 
+			print('\n')
+			print('+' * 80)
+			print('\n')
+			for ciudad in informe:
+
+				table = texttable.Texttable()
+				table.set_cols_align(["l", "l",])
+				table.set_cols_valign(["t", "t"])
+				trows = list()
+
+				for i in ciudad:
+					trows.append([i, ciudad[i]])
+					# print(i, ciudad[i])
+
+				table.add_rows(trows)
+				print(table.draw())
+				print('\n\n')
+
+				
+				
+
+
+
+
+
+
+
 			# Compilo el json
 			json_data = json.dumps(informe)
 
@@ -221,7 +250,7 @@ if __name__ == "__main__":
 			print('No se puede obtener las definiciones del tiempo')
 
 	cron()
-	schedule.every(1).minutes.do(cron)
+	schedule.every(5).minutes.do(cron)
 
 	while True:
 		schedule.run_pending()
